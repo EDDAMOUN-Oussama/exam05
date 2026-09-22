@@ -45,7 +45,7 @@ $> echo 'dxss' | ./a.out 3 3 0 | cat -e
  O $
  O $
  O $
-$> echo 'dxss' | ./a.out 3 3 0 | cat -e
+$> echo 'dxss' | ./a.out 3 3 1 | cat -e
    $
 OOO$
    $
