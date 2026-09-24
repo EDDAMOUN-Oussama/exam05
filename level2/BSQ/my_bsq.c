@@ -17,7 +17,7 @@ int square(int h, int w, int row, int col, char map[h][w + 1], char empty)
 
 int err()
 {
-    fputs("Error: Invalid map\n", stdout);
+    fputs("Error: invalid map\n", stdout);
     return (1);
 }
 
