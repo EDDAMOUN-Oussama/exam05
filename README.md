@@ -1,12 +1,23 @@
-# 42 Exam Rank 05 — Practice Repository
+# 42 Exam Rank 05 — Preparation Repository
 
-This repository contains my personal preparation work for the current 42 Exam Rank 05 exercises.
+Personal preparation repository for **42 Exam Rank 05**, organized by exam level and focused on understanding, rewriting, and testing each exercise under exam conditions.
 
-> This is a study repository, not an official 42 repository. Subjects and exam details can change, so the subject provided during the exam is always the final reference.
+> [!IMPORTANT]
+> This is a personal study repository, not an official 42 repository. The subject provided during the exam is always the final reference.
+
+## Progress
+
+| Level | Exercise | Language | Main focus | Personal status |
+|---|---|---|---|---|
+| 1 | [bigint](level1/bigint/) | C++ | Arbitrary precision, operators, string arithmetic | Practice |
+| 1 | [vect2](level1/vect2/) | C++ | Operator overloading, const correctness | ✅ **Passed with this implementation** |
+| 1 | [polyset](level1/polyset/) | C++ | Polymorphism, virtual inheritance, wrappers | Practice |
+| 2 | [life](level2/life/) | C | Game of Life, double buffering | Practice |
+| 2 | [BSQ](level2/BSQ/) | C | Parsing, validation, largest-square search | ✅ **Passed with this implementation approach** |
 
 ## Repository structure
 
-~~~text
+```text
 exam05/
 ├── level1/
 │   ├── bigint/
@@ -15,158 +26,122 @@ exam05/
 └── level2/
     ├── life/
     └── BSQ/
-~~~
+```
 
-## Exercises
+Each exercise directory contains its own README with the objective, implementation idea, important code concepts, compilation examples, edge cases, and exam notes.
 
-| Level | Exercise | Language | Main topics |
-|---|---|---|---|
-| 1 | bigint | C++ | arbitrary precision integers, operator overloading, string arithmetic |
-| 1 | vect2 | C++ | 2D vectors, operator overloading, const/non-const access |
-| 1 | polyset | C++ | abstract classes, polymorphism, virtual/multiple inheritance, wrappers |
-| 2 | life | C | Game of Life, input commands, double buffering, neighbor counting |
-| 2 | BSQ | C | parsing, map validation, exhaustive square search, tie-breaking |
+## Exercise overview
 
-Each exercise directory contains a dedicated README explaining the idea, the code structure, important operators/functions, how to compile it, and exam notes.
+### Level 1
 
-## Level 1
+#### bigint
+Implements an unsigned arbitrary-precision integer using a decimal string.
 
-### bigint
-
-The bigint class stores an unsigned integer as a decimal string so it can represent values larger than the native integer types.
-
-The current implementation covers:
-
-- construction and copying;
+Main topics:
+- manual addition with carry;
+- comparisons;
+- prefix/postfix increment;
+- decimal digit shifts;
 - stream output;
-- arbitrary-length addition;
-- +=;
-- prefix and postfix ++;
-- all comparison operators;
-- decimal left shift;
-- decimal right shift.
+- operator overloading.
 
-The key idea is manual arithmetic on decimal digits using carry propagation.
+#### vect2
+Implements a 2D integer vector and practices C++ operator overloading.
 
-See: level1/bigint/README.md
-
-### vect2
-
-The vect2 class represents a two-dimensional integer vector.
-
-The implementation practices:
-
-- arithmetic operators;
+Main topics:
+- arithmetic and compound operators;
 - scalar multiplication in both directions;
-- prefix/postfix increment and decrement;
-- mutable and const operator[];
+- prefix/postfix `++` and `--`;
+- const/non-const `operator[]`;
 - unary minus;
-- equality and inequality;
+- equality;
 - stream output.
 
-See: level1/vect2/README.md
+> [!NOTE]
+> I personally passed **vect2** in Exam Rank 05 using the implementation contained in this repository.
 
-### polyset
+#### polyset
+Extends the supplied bag hierarchy with searchable implementations and a set wrapper.
 
-polyset is mainly an object-oriented design exercise.
+Main topics:
+- abstract classes;
+- polymorphism;
+- multiple/virtual inheritance;
+- const correctness;
+- wrapper design.
 
-It combines the supplied bag hierarchy with:
+### Level 2
 
-- searchable_array_bag;
-- searchable_tree_bag;
-- set.
+#### life
+Simulates Conway's Game of Life after drawing generation 0 from commands read on standard input.
 
-The exercise is useful for understanding abstract interfaces, polymorphism, multiple inheritance, virtual inheritance, const correctness, and the difference between a bag and a set.
+Main topics:
+- command parsing;
+- padded grids;
+- neighbor counting;
+- double buffering;
+- exact output formatting.
 
-See: level1/polyset/README.md
+#### BSQ
+Finds the biggest square of empty cells while avoiding obstacles.
 
-## Level 2
+This repository intentionally uses a **non-Dynamic-Programming brute-force approach** because it is simple to understand and rewrite under exam conditions.
 
-### life
+> [!NOTE]
+> I personally passed **BSQ** in Exam Rank 05 using this implementation approach.
 
-The Life solution:
+An extended tester is included at:
 
-1. reads drawing commands from stdin;
-2. builds generation 0;
-3. uses a padded board so outside cells behave as dead cells;
-4. alternates between two grids;
-5. counts the eight neighbors of each cell;
-6. applies Conway's Game of Life rules;
-7. prints the requested generation.
-
-See: level2/life/README.md
-
-### BSQ
-
-The BSQ solution in this repository intentionally uses an exhaustive search approach instead of Dynamic Programming.
-
-It:
-
-1. parses the header;
-2. validates the map;
-3. stores the map in a variable-length array;
-4. tries the largest possible square from every position;
-5. keeps the first largest square found;
-6. fills that square with the full character;
-7. prints the final map.
-
-Because positions are scanned from top to bottom and left to right, and the best square is updated only for a strictly larger size, ties naturally keep the topmost and then leftmost solution.
-
-A stronger tester is included as:
-
-~~~text
+```text
 level2/BSQ/test_bsq.py
-~~~
+```
 
-See: level2/BSQ/README.md
+## Preparation workflow
 
-## Suggested preparation order
+```text
+read the subject
+      ↓
+understand the required behavior
+      ↓
+rewrite the solution without looking
+      ↓
+compile with strict warnings
+      ↓
+test edge cases
+      ↓
+compare again with the subject
+```
 
-The order I used while preparing is:
+My preparation order was:
 
-~~~text
+```text
 bigint -> life -> polyset -> vect2 -> BSQ
-~~~
+```
 
-The exercises test different skills, so the goal is not only to memorize code but to be able to rebuild each solution from its core idea.
-
-## General compilation notes
-
-Use the compiler and standard required by the subject/exam environment.
+## Compilation
 
 Typical examples:
 
-~~~bash
+```bash
 # C
 cc -Wall -Wextra -Werror file.c -o program
 
 # C++
 c++ -Wall -Wextra -Werror file.cpp main.cpp -o program
-~~~
+```
 
-For polyset, the supplied subject classes must also be compiled and their include directory added.
+Always follow the compiler and language standard required by the actual exam subject.
 
 ## Acknowledgements
 
-A big thank you to the following repositories that helped me during preparation:
+Special thanks to:
 
-- [aychikhi/42-Exam05](https://github.com/aychikhi/42-Exam05) — very helpful for understanding and practicing the Level 1 exercises and Life.
-- [Prometheus1994/42-Exam-Rank-05-Without-dynamic-programming](https://github.com/Prometheus1994/42-Exam-Rank-05-Without-dynamic-programming) — gave me the idea of solving BSQ without Dynamic Programming.
-- [Redadaghouj/Exam-Rank-05](https://github.com/Redadaghouj/Exam-Rank-05) — provided the base idea for the BSQ testing workflow. I reviewed that tester and created an expanded version in this repository.
+- [aychikhi/42-Exam05](https://github.com/aychikhi/42-Exam05) — very helpful for understanding and practicing the Level 1 exercises and **Life**.
+- [Prometheus1994/42-Exam-Rank-05-Without-dynamic-programming](https://github.com/Prometheus1994/42-Exam-Rank-05-Without-dynamic-programming) — gave me the idea of approaching **BSQ without Dynamic Programming**.
+- [Redadaghouj/Exam-Rank-05](https://github.com/Redadaghouj/Exam-Rank-05) — provided a useful BSQ testing base. I reviewed it and added a stricter expanded tester in this repository.
 
 Thanks to the authors for sharing their work with the 42 community.
 
-## Final note
+## Disclaimer
 
-The most useful way to use this repository is:
-
-~~~text
-read the subject
--> understand the idea
--> rewrite the solution without looking
--> compile with strict warnings
--> test edge cases
--> compare the result with the subject
-~~~
-
-Good luck with Exam Rank 05.
+These solutions are published for learning and exam preparation. Subjects may change, so always read the exercise statement you receive before reusing an implementation.
